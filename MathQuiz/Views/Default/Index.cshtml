@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "Math Practice!";
+}
+
+<div class="row">    
+    <div class="col-md-offset-1 col-md-7" data-bind="if: quizRunning">
+        <form class="form-horizontal" role="form" data-bind="submit: nextQuestion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" data-bind="text: headingText"></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-offset-1 col-xs-10">
+                            <div class="form-group">
+                                <label class="col-xs-6 control-label current-question" data-bind="text: currentQuestion">
+                                </label>
+                                <div class="col-xs-3">
+                                    <input type="text" class="form-control answer" data-bind="value: currentAnswer, hasFocus: true, event: { blur: lostFocus }" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-xs-offset-1 col-xs-10">
+                            <div class="progress progress-striped active">
+                                <div data-bind="css: countdownClass, style: { width: percentRemaining() + '%' }" role="progressbar" style="width: 100%">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer" style="height: 56px;">
+                    <div class="pull-right">
+                        <button class="btn btn-primary">Next Question</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-offset-1 col-md-7" data-bind="visible: showIntro">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title" data-bind="text: headingText"></h3>
+            </div>
+            <div class="panel-body">
+                Click "Start Quiz" to begin. You will have <span data-bind="text: maxQuizTime"></span>&nbsp;to complete the quiz.
+            </div>
+            <div class="panel-footer" style="height: 56px;">
+                <div class="pull-right">
+                    <button class="btn btn-primary" data-bind="click: start">Start Quiz!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-offset-1 col-md-7" data-bind="visible: !quizRunning() && quizOver()">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Report Card</h3>
+            </div>
+            <div class="panel-body">
+                <h1>
+                    <span data-bind="text: score"></span>&nbsp;out of
+                    <span data-bind="text: questions().length"></span>&nbsp;correct. 
+                    Your grade is: <span data-bind="text: grade"></span>
+                </h1>
+                <ul data-bind="foreach: questions">
+                    <li data-bind="style: { color: userAnswer() != answer() ? 'red' : 'green' }">
+                        <span data-bind="text: firstNumber"></span>
+                        <span data-bind="text: $root.getOperator(operator)"></span>
+                        <span data-bind="text: secondNumber"></span>
+                        =
+                        <span data-bind="text: answer"></span>
+                        <span data-bind="if: answer() != userAnswer() && userAnswer() != ''">(Your answer was: <span data-bind="    text: userAnswer"></span>)
+                        </span>
+                        <span data-bind="if: answer() != userAnswer() && userAnswer() == ''">(You didn't give a answer)
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="panel-footer" style="height: 56px;">
+                <div class="pull-right">
+                    <button class="btn btn-primary" data-bind="click: tryAgain">Try Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Progress and Score</h3>
+            </div>
+            <div class="panel-body">
+                <h4>Question: <span data-bind="text: currentQuestionIndex() + 1"></span>&nbsp;/ <span data-bind="    text: questions().length"></span></h4>
+                <h4>Score: <span data-bind="text: score"></span></h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="/Scripts/mathpractice.js"></script>
+}
