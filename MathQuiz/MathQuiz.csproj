@@ -104,18 +104,16 @@
     <Content Include="Scripts\knockout-3.0.0.js" />
     <Content Include="Scripts\mathpractice.js" />
     <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\mathquiz - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\mathquiz - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\MathQuiz.pubxml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
