@@ -47,6 +47,12 @@ var Quiz = function (mode) {
                     }
                 }
             }
+            else if (mode == "-") {
+                // Prevent negative numbers as answers by making second be less or equal to first.
+                first = Math.floor(Math.random() * (maxNumberSize - 1)) + 1;
+                second = Math.floor(Math.random() * (first - 1)) + 1;
+                answer = eval(first + mode + second);
+            }
             else {
                 first = Math.floor(Math.random() * (maxNumberSize - 1)) + 1;
                 second = Math.floor(Math.random() * (maxNumberSize - 1)) + 1;
